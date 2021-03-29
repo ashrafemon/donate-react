@@ -17,7 +17,6 @@ import {Link} from "react-router-dom";
 import {FaEye} from "react-icons/fa";
 
 const Login = () => {
-
     const passwordRef = useRef(null)
 
     const passwordToggleHandler = () => {
@@ -54,7 +53,7 @@ const Login = () => {
                     <Link to="/">
                         <LinkText>Forget Password?</LinkText>
                     </Link>
-                    <AccessText>Don't have an account? <Link to="/">Sign Up</Link></AccessText>
+                    <AccessText>Don't have an account? <Link to="/register">Sign Up</Link></AccessText>
                 </FormGroup>
 
             </DividerBox>

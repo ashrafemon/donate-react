@@ -4,6 +4,12 @@ export const AuthWrapper = styled.div`
   width: 100%;
   height: 100vh;
   display: flex;
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+    padding: 30px 0;
+    height: initial;
+  }
 `
 export const LogoSideBox = styled.div`
   width: 60%;
@@ -12,6 +18,10 @@ export const LogoSideBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 767px) {
+    width: 100%;
+  }
 `
 
 export const SuggestText = styled.p`
@@ -21,6 +31,10 @@ export const SuggestText = styled.p`
   width: 40%;
   margin: 30px 0 0;
   line-height: 1.8;
+
+  @media (max-width: 767px) {
+    width: 80%;
+  }
 `
 
 export const DividerBox = styled.div`
@@ -28,6 +42,11 @@ export const DividerBox = styled.div`
   height: 100%;
   padding: 50px 0;
   box-sizing: border-box;
+
+  @media (max-width: 767px) {
+    width: 90%;
+    margin: auto;
+  }
 `
 
 export const PortionTitle = styled.h2`
@@ -100,6 +119,7 @@ export const AuthButton = styled.button`
   outline: 0;
   border-radius: 30px;
   cursor: pointer;
+  user-select: none;
 
   &:hover {
     background-color: rgba(199, 1, 0, .8);
@@ -146,6 +166,7 @@ export const CircleRadio = styled.button`
   border: 1px solid #C70100;
   border-radius: 50%;
   cursor: pointer;
+  user-select: none;
 `
 
 export const SquareGroup = styled.div`
@@ -186,4 +207,79 @@ export const SquareRadio = styled.button`
 `
 export const SquareRadioImg = styled.img`
   width: 100%;
+`
+
+export const SliderBox = styled.div`
+  width: 100%;
+`
+export const SliderBoxTitle = styled.p`
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  color: #000000;
+  margin-bottom: 15px;
+  text-align: center;
+`
+
+export const SliderList = styled.ul`
+  width: 100%;
+  overflow-x: auto;
+  margin: 0 0 10px;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  user-select: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  //&::-webkit-scrollbar {
+  //  background-color: #ffffff;
+  //  height: 8px;
+  //}
+  //
+  //&::-webkit-scrollbar-thumb {
+  //  background-color: #C70100;
+  //  border-radius: 5px;
+  //}
+`
+
+export const SliderListItem = styled.li`
+  flex: 1;
+  font-family: 'Roboto', sans-serif;
+  font-size: 35px;
+  font-weight: bold;
+  color: ${props => props.isActive ? '#000000' : '#c5c5c5'};
+  cursor: pointer;
+  padding: 10px 20px;
+  box-sizing: border-box;
+`
+
+export const UploadPhotoInput = styled.input`
+  display: none;
+`
+
+export const UploadPhotoBtn = styled.button`
+  width: 150px;
+  height: 150px;
+  display: block;
+  border: 0;
+  outline: 0;
+  box-shadow: 2px 2px 3px 2px #E7E7E7;
+  background-color: #F6F7F9;
+  border-radius: 50%;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  color: #000000;
+  cursor: pointer;
+  text-align: center;
+
+  svg {
+    display: block;
+    margin: 0 auto 5px;
+    font-size: 50px;
+    fill: #C70100;
+  }
 `
