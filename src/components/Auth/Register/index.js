@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {AuthButton, AuthWrapper, DividerBox, FormGroup, LogoSideBox, SuggestText} from "../styled";
 import Logo from "../../shared/Logo";
 import BasicInfo from "./BasicInfo";
@@ -9,25 +9,49 @@ import GenderInfo from "./GenderInfo";
 import AddressInfo from "./AddressInfo";
 import AgeInfo from "./AgeInfo";
 import PhotoInfo from "./PhotoInfo";
+import {fetchBloodGroups} from "../../../store/actions/auth/actions";
+import {useDispatch, useSelector} from "react-redux";
 
 const Register = () => {
+    const dispatch = useDispatch()
+    const suggestedText = useSelector(state => state.auth.suggestedText)
+
     const [activeStep, setActiveStep] = useState(1)
-    const nextHandler = () => {
-        activeStep < 8
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        password: '',
+        phone: '',
+        alternate_phone: '',
+        social_link: '',
+        blood_group: '',
+        weight: '',
+        gender: '',
+        street_address: '',
+        city: '',
+        post_code: '',
+        dob: '',
+        age: '',
+        avatar: ''
+    })
+
+    useEffect(() => {
+        dispatch(fetchBloodGroups())
+    }, [dispatch])
+
+    const nextTabHandler = () => {
+        activeStep <= 8
             ? setActiveStep(activeStep + 1)
             : console.log('Sorry')
     }
+    const fieldChangeHandler = (value, item) => {
+        setFormData({
+            ...formData,
+            [item]: value
+        })
+    }
 
-    const [suggestedText] = useState({
-        basic: 'Provide your real name for your identity. Your name will be used for search.',
-        contact: 'Please provide correct phone no. This information will keep safe.',
-        blood: 'Your blood group need to be accurate. If you don\'t know about it please contact nearest clinic.',
-        weight: 'Note: you can not donate blood if you\'re under weight. Minimum weight for donation required 50KG',
-        gender: 'Defining your gender will let us know bring new features for mothers health care.',
-        address: 'Please provide correct address. This information will keep safe.',
-        age: 'Correct birthdate give you best experience with the community. Don\'t hide it.',
-        photo: 'Please do not use a model or doll avatar. Please keep faith on yourself you\'re beautiful too.'
-    })
+    console.log(formData)
 
     return (
         <AuthWrapper>
@@ -45,19 +69,43 @@ const Register = () => {
                 </SuggestText>
             </LogoSideBox>
             <DividerBox>
-                {activeStep === 1 && <BasicInfo/>}
-                {activeStep === 2 && <ContactInfo/>}
-                {activeStep === 3 && <BloodGroupInfo/>}
-                {activeStep === 4 && <WeightInfo/>}
-                {activeStep === 5 && <GenderInfo/>}
-                {activeStep === 6 && <AddressInfo/>}
-                {activeStep === 7 && <AgeInfo/>}
-                {activeStep === 8 && <PhotoInfo/>}
+                {activeStep === 1 && <BasicInfo
+                    formData={formData}
+                    handler={fieldChangeHandler}
+                />}
+                {activeStep === 2 && <ContactInfo
+                    formData={formData}
+                    handler={fieldChangeHandler}
+                />}
+                {activeStep === 3 && <BloodGroupInfo
+                    formData={formData}
+                    handler={fieldChangeHandler}
+                />}
+                {activeStep === 4 && <WeightInfo
+                    formData={formData}
+                    handler={fieldChangeHandler}
+                />}
+                {activeStep === 5 && <GenderInfo
+                    formData={formData}
+                    handler={fieldChangeHandler}
+                />}
+                {activeStep === 6 && <AddressInfo
+                    formData={formData}
+                    handler={fieldChangeHandler}
+                />}
+                {activeStep === 7 && <AgeInfo
+                    formData={formData}
+                    handler={fieldChangeHandler}
+                />}
+                {activeStep === 8 && <PhotoInfo
+                    formData={formData}
+                    handler={fieldChangeHandler}
+                />}
 
                 <FormGroup>
                     {activeStep < 8
-                        ? <AuthButton onClick={nextHandler}>Next</AuthButton>
-                        : <AuthButton onClick={nextHandler}>Start Journey</AuthButton>
+                        ? <AuthButton type="button" onClick={nextTabHandler}>Next</AuthButton>
+                        : <AuthButton type="button">Start Journey</AuthButton>
                     }
                 </FormGroup>
             </DividerBox>

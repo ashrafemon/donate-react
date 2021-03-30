@@ -31,6 +31,7 @@ export const SuggestText = styled.p`
   width: 40%;
   margin: 30px 0 0;
   line-height: 1.8;
+  user-select: none;
 
   @media (max-width: 767px) {
     width: 80%;
@@ -160,13 +161,21 @@ export const CircleGroup = styled.div`
 export const CircleRadio = styled.button`
   width: 60px;
   height: 60px;
-  background-color: #ffffff;
-  color: #C70100;
+  background-color: ${props => props.isActive ? '#C70100' : '#ffffff'};
+  color: ${props => props.isActive ? '#ffffff' : '#C70100'};
   outline: 0;
   border: 1px solid #C70100;
   border-radius: 50%;
   cursor: pointer;
   user-select: none;
+  transition-duration: .5s;
+  letter-spacing: 1px;
+  overflow: hidden;
+
+  &:hover {
+    background-color: #C70100;
+    color: #ffffff;
+  }
 `
 
 export const SquareGroup = styled.div`
@@ -180,11 +189,11 @@ export const SquareGroup = styled.div`
 export const SquareRadio = styled.button`
   width: 120px;
   height: 180px;
-  background-color: #F6F7F9;
-  color: #515252;
+  background-color: ${props => props.isActive ? '#5cb85c' : '#F6F7F9'};
+  color: ${props => props.isActive ? '#ffffff' : '#515252'};
   outline: 0;
   border: 0;
-  box-shadow: 2px 2px 5px 1px #E7E7E7;
+  box-shadow: 2px 2px 5px 1px ${props => props.isActive ? '#5cb85c' : '#E7E7E7'};
   cursor: pointer;
   padding: 10px;
   box-sizing: border-box;
@@ -202,6 +211,12 @@ export const SquareRadio = styled.button`
     position: absolute;
     top: -10px;
     left: -10px;
+  }
+
+  &:hover {
+    background-color: #5cb85c;
+    color: #ffffff;
+    box-shadow: 2px 2px 5px 1px #5cb85c;
   }
 
 `
@@ -254,6 +269,10 @@ export const SliderListItem = styled.li`
   cursor: pointer;
   padding: 10px 20px;
   box-sizing: border-box;
+  
+  &:hover{
+    color: #000000;
+  }
 `
 
 export const UploadPhotoInput = styled.input`
@@ -266,7 +285,7 @@ export const UploadPhotoBtn = styled.button`
   display: block;
   border: 0;
   outline: 0;
-  box-shadow: 2px 2px 3px 2px #E7E7E7;
+  box-shadow: 2px 2px 2px 3px #E7E7E7;
   background-color: #F6F7F9;
   border-radius: 50%;
   font-family: 'Roboto', sans-serif;
@@ -281,5 +300,33 @@ export const UploadPhotoBtn = styled.button`
     margin: 0 auto 5px;
     font-size: 50px;
     fill: #C70100;
+  }
+`
+
+export const ToastMessage = styled.div`
+  width: 300px;
+  min-height: 34px;
+  padding: 10px 10px 10px 20px;
+  box-sizing: border-box;
+  background-color: ${props => props.type === 'danger' ? '#C70100' : '#5cb85c'};
+  color: #ffffff;
+  font-size: 14px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  text-align: justify;
+  position: fixed;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 99999;
+  border-radius: 3px;
+  box-shadow: 3px 3px 8px ${props => props.type === 'danger' ? '#C70100' : '#5cb85c'};
+
+  svg {
+    position: absolute;
+    top: 10px;
+    right: 5px;
+    color: #ffffff;
+    cursor: pointer;
   }
 `
