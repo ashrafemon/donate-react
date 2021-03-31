@@ -10,7 +10,11 @@ const App = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(fetchMe())
+        const TOKEN = localStorage.getItem('token')
+
+        if (TOKEN) {
+            dispatch(fetchMe())
+        }
     }, [dispatch])
 
     return (

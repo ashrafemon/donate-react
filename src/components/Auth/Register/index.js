@@ -9,12 +9,20 @@ import GenderInfo from "./GenderInfo";
 import AddressInfo from "./AddressInfo";
 import AgeInfo from "./AgeInfo";
 import PhotoInfo from "./PhotoInfo";
-import {fetchBloodGroups} from "../../../store/actions/auth/actions";
+import {
+    dispatchResetRegister,
+    dispatchToggleMessage,
+    fetchBloodGroups,
+    register
+} from "../../../store/actions/auth/actions";
 import {useDispatch, useSelector} from "react-redux";
+import {useHistory} from "react-router-dom";
 
 const Register = () => {
+    const history = useHistory()
     const dispatch = useDispatch()
     const suggestedText = useSelector(state => state.auth.suggestedText)
+    const {registered} = useSelector(state => state.auth.register)
 
     const [activeStep, setActiveStep] = useState(1)
     const [formData, setFormData] = useState({
@@ -35,11 +43,62 @@ const Register = () => {
         avatar: ''
     })
 
+    console.log(registered)
+
     useEffect(() => {
         dispatch(fetchBloodGroups())
     }, [dispatch])
 
+    useEffect(() => {
+        if (registered === true) {
+            history.replace('/login')
+            dispatch(dispatchResetRegister({
+                status: '',
+                registered: false
+            }))
+        }
+        // eslint-disable-next-line
+    }, [registered])
+
+    const validateMessage = () => {
+        dispatch(dispatchToggleMessage({
+            show: true,
+            type: 'danger',
+            text: 'Please fill up the required field *'
+        }))
+    }
+
     const nextTabHandler = () => {
+        if (activeStep === 1) {
+            if (formData.name === '' || formData.email === '' || formData.password === '' || formData.password.length < 6) {
+                return validateMessage()
+            }
+        } else if (activeStep === 2) {
+            if (formData.phone === '' || formData.alternate_phone === '') {
+                return validateMessage()
+            }
+        } else if (activeStep === 3) {
+            if (formData.blood_group === '') {
+                return validateMessage()
+            }
+        } else if (activeStep === 4) {
+            if (formData.weight === '') {
+                return validateMessage()
+            }
+        } else if (activeStep === 5) {
+            if (formData.gender === '') {
+                return validateMessage()
+            }
+        } else if (activeStep === 6) {
+            if (formData.street_address === '' || formData.city === '' || formData.post_code === '') {
+                return validateMessage()
+            }
+        } else if (activeStep === 7) {
+            if (formData.age === '' || formData.dob === '') {
+                return validateMessage()
+            }
+        }
+
         activeStep <= 8
             ? setActiveStep(activeStep + 1)
             : console.log('Sorry')
@@ -50,8 +109,19 @@ const Register = () => {
             [item]: value
         })
     }
+    const submitHandler = () => {
+        if (activeStep === 8) {
+            if (formData.avatar === '') {
+                return dispatch(dispatchToggleMessage({
+                    show: true,
+                    type: 'danger',
+                    text: 'Please upload your photo'
+                }))
+            }
+        }
 
-    console.log(formData)
+        dispatch(register(formData))
+    }
 
     return (
         <AuthWrapper>
@@ -105,7 +175,7 @@ const Register = () => {
                 <FormGroup>
                     {activeStep < 8
                         ? <AuthButton type="button" onClick={nextTabHandler}>Next</AuthButton>
-                        : <AuthButton type="button">Start Journey</AuthButton>
+                        : <AuthButton type="button" onClick={submitHandler}>Start Journey</AuthButton>
                     }
                 </FormGroup>
             </DividerBox>

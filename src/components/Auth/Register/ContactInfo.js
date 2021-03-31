@@ -7,7 +7,7 @@ const ContactInfo = ({formData, handler}) => {
             <PortionTitle style={{textAlign: 'left'}}>Contact <br/> Information</PortionTitle>
 
             <FormGroup>
-                <FormLabel htmlFor="phone">Phone No</FormLabel>
+                <FormLabel htmlFor="phone">Phone No*</FormLabel>
                 <FormControlText
                     type="text"
                     id="phone"
@@ -18,7 +18,7 @@ const ContactInfo = ({formData, handler}) => {
             </FormGroup>
 
             <FormGroup>
-                <FormLabel htmlFor="alter_phone">Alternative Phone No</FormLabel>
+                <FormLabel htmlFor="alter_phone">Alternative Phone No*</FormLabel>
                 <FormControlText
                     type="text"
                     id="alter_phone"

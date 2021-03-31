@@ -7,7 +7,7 @@ const AddressInfo = ({formData, handler}) => {
             <PortionTitle style={{textAlign: 'left'}}>Where Do <br/> You Live?</PortionTitle>
 
             <FormGroup>
-                <FormLabel htmlFor="street_address">Street Address</FormLabel>
+                <FormLabel htmlFor="street_address">Street Address*</FormLabel>
                 <FormControlText
                     type="text"
                     id="street_address"
@@ -18,7 +18,7 @@ const AddressInfo = ({formData, handler}) => {
             </FormGroup>
 
             <FormGroup>
-                <FormLabel htmlFor="city">City</FormLabel>
+                <FormLabel htmlFor="city">City*</FormLabel>
                 <FormControlText
                     type="text"
                     id="city"
@@ -29,7 +29,7 @@ const AddressInfo = ({formData, handler}) => {
             </FormGroup>
 
             <FormGroup>
-                <FormLabel htmlFor="postal_code">Postal Code</FormLabel>
+                <FormLabel htmlFor="postal_code">Postal Code*</FormLabel>
                 <FormControlText
                     type="number"
                     id="postal_code"

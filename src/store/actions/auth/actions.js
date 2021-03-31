@@ -1,6 +1,6 @@
 import * as types from "./types"
 import {API_URL} from "../../../utils/urls";
-import {jsonTypeHeaders} from "../../../utils/helpers";
+import {formDataBuilder, jsonTypeHeaders} from "../../../utils/helpers";
 
 const TOKEN = localStorage.getItem('token')
 
@@ -22,6 +22,16 @@ export const dispatchLogin = payload => ({
 
 export const dispatchMe = payload => ({
     type: types.CURRENT_USER,
+    payload
+})
+
+export const dispatchRegister = payload => ({
+    type: types.REGISTER,
+    payload
+})
+
+export const dispatchResetRegister = payload => ({
+    type: types.RESET_REGISTER,
     payload
 })
 
@@ -94,6 +104,34 @@ export const fetchMe = () => dispatch => {
                     token: TOKEN,
                     currentUser: res.user,
                     isAuthenticate: true
+                }))
+            }
+        })
+        .catch(err => console.log(err))
+}
+
+export const register = data => dispatch => {
+    let formedData = formDataBuilder(data)
+
+    fetch(API_URL + 'auth/register', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json'
+        },
+        body: formedData
+    })
+        .then(res => res.json())
+        .then(res => {
+            console.log(res)
+            if (res.status === 'done') {
+                dispatch(dispatchToggleMessage({
+                    show: true,
+                    type: 'success',
+                    text: res.message
+                }))
+                dispatch(dispatchRegister({
+                    status: 'done',
+                    registered: true
                 }))
             }
         })

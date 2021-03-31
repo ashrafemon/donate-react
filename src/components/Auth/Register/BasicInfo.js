@@ -16,7 +16,7 @@ const BasicInfo = ({formData, handler}) => {
             <PortionTitle style={{textAlign: 'left'}}>Let Us Know <br/> About Your</PortionTitle>
 
             <FormGroup>
-                <FormLabel htmlFor="name">Name</FormLabel>
+                <FormLabel htmlFor="name">Name*</FormLabel>
                 <FormControlText
                     value={formData.name}
                     type="text"
@@ -27,7 +27,7 @@ const BasicInfo = ({formData, handler}) => {
             </FormGroup>
 
             <FormGroup>
-                <FormLabel htmlFor="email">Username</FormLabel>
+                <FormLabel htmlFor="email">Username*</FormLabel>
                 <FormControlText
                     value={formData.email}
                     type="email"
@@ -38,7 +38,7 @@ const BasicInfo = ({formData, handler}) => {
             </FormGroup>
 
             <FormGroup>
-                <FormLabel htmlFor="password">Password</FormLabel>
+                <FormLabel htmlFor="password">Password* (minimum 6 characters)</FormLabel>
                 <FormControlText
                     value={formData.password}
                     ref={passwordRef}

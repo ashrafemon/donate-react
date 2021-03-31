@@ -19,6 +19,10 @@ const initialState = {
         address: 'Please provide correct address. This information will keep safe.',
         age: 'Correct birthdate give you best experience with the community. Don\'t hide it.',
         photo: 'Please do not use a model or doll avatar. Please keep faith on yourself you\'re beautiful too.'
+    },
+    register: {
+        status: '',
+        registered: false
     }
 }
 
@@ -37,6 +41,16 @@ const authReducer = (state = initialState, action) => {
                 token: action.payload.token,
                 isAuthenticate: action.payload.isAuthenticate,
                 currentUser: action.payload.currentUser
+            }
+        case types.REGISTER:
+            return {
+                ...state,
+                register: action.payload
+            }
+        case types.RESET_REGISTER:
+            return {
+                ...state,
+                register: action.payload
             }
         case types.LOGOUT:
             return {

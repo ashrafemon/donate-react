@@ -41,7 +41,11 @@ const AgeInfo = ({formData, handler}) => {
     }
 
     useEffect(() => {
-        handler(`${selected.date}-${selected.month}`, 'dob')
+        if(selected.date !== '' && selected.month !== ''){
+            handler(`${selected.date}-${selected.month}`, 'dob')
+        }
+
+        // eslint-disable-next-line
     }, [selected])
 
     return (
