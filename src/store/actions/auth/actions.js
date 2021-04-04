@@ -47,7 +47,7 @@ export const fetchBloodGroups = () => dispatch => {
     })
         .then(res => res.json())
         .then(res => {
-            console.log(res)
+            // console.log(res)
             if (res.status === 'done') {
                 dispatch(dispatchFetchBloodGroups(res.blood_groups))
             }
@@ -56,7 +56,7 @@ export const fetchBloodGroups = () => dispatch => {
 }
 
 export const login = data => dispatch => {
-    console.log(data)
+    // console.log(data)
     fetch(API_URL + 'auth/login', {
         method: 'POST',
         headers: jsonTypeHeaders,
@@ -98,7 +98,7 @@ export const fetchMe = () => dispatch => {
     })
         .then(res => res.json())
         .then(res => {
-            console.log(res)
+            // console.log(res)
             if (res.status === 'done' && res.user !== undefined) {
                 dispatch(dispatchMe({
                     token: TOKEN,
@@ -122,7 +122,7 @@ export const register = data => dispatch => {
     })
         .then(res => res.json())
         .then(res => {
-            console.log(res)
+            // console.log(res)
             if (res.status === 'done') {
                 dispatch(dispatchToggleMessage({
                     show: true,
@@ -148,7 +148,7 @@ export const logout = () => dispatch => {
     })
         .then(res => res.json())
         .then(res => {
-            console.log(res)
+            // console.log(res)
             if (res.status === 'done') {
                 dispatch(dispatchToggleMessage({
                     show: true,

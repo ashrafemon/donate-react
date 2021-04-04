@@ -17,6 +17,7 @@ import {
 } from "../../../store/actions/auth/actions";
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
+import AuthLayout from "../../../layouts/AuthLayout";
 
 const Register = () => {
     const history = useHistory()
@@ -42,8 +43,6 @@ const Register = () => {
         age: '',
         avatar: ''
     })
-
-    console.log(registered)
 
     useEffect(() => {
         dispatch(fetchBloodGroups())
@@ -124,62 +123,64 @@ const Register = () => {
     }
 
     return (
-        <AuthWrapper>
-            <LogoSideBox>
-                <Logo/>
-                <SuggestText>
-                    {activeStep === 1 && suggestedText.basic}
-                    {activeStep === 2 && suggestedText.contact}
-                    {activeStep === 3 && suggestedText.blood}
-                    {activeStep === 4 && suggestedText.weight}
-                    {activeStep === 5 && suggestedText.gender}
-                    {activeStep === 6 && suggestedText.address}
-                    {activeStep === 7 && suggestedText.age}
-                    {activeStep === 8 && suggestedText.photo}
-                </SuggestText>
-            </LogoSideBox>
-            <DividerBox>
-                {activeStep === 1 && <BasicInfo
-                    formData={formData}
-                    handler={fieldChangeHandler}
-                />}
-                {activeStep === 2 && <ContactInfo
-                    formData={formData}
-                    handler={fieldChangeHandler}
-                />}
-                {activeStep === 3 && <BloodGroupInfo
-                    formData={formData}
-                    handler={fieldChangeHandler}
-                />}
-                {activeStep === 4 && <WeightInfo
-                    formData={formData}
-                    handler={fieldChangeHandler}
-                />}
-                {activeStep === 5 && <GenderInfo
-                    formData={formData}
-                    handler={fieldChangeHandler}
-                />}
-                {activeStep === 6 && <AddressInfo
-                    formData={formData}
-                    handler={fieldChangeHandler}
-                />}
-                {activeStep === 7 && <AgeInfo
-                    formData={formData}
-                    handler={fieldChangeHandler}
-                />}
-                {activeStep === 8 && <PhotoInfo
-                    formData={formData}
-                    handler={fieldChangeHandler}
-                />}
+        <AuthLayout>
+            <AuthWrapper>
+                <LogoSideBox>
+                    <Logo/>
+                    <SuggestText>
+                        {activeStep === 1 && suggestedText.basic}
+                        {activeStep === 2 && suggestedText.contact}
+                        {activeStep === 3 && suggestedText.blood}
+                        {activeStep === 4 && suggestedText.weight}
+                        {activeStep === 5 && suggestedText.gender}
+                        {activeStep === 6 && suggestedText.address}
+                        {activeStep === 7 && suggestedText.age}
+                        {activeStep === 8 && suggestedText.photo}
+                    </SuggestText>
+                </LogoSideBox>
+                <DividerBox>
+                    {activeStep === 1 && <BasicInfo
+                        formData={formData}
+                        handler={fieldChangeHandler}
+                    />}
+                    {activeStep === 2 && <ContactInfo
+                        formData={formData}
+                        handler={fieldChangeHandler}
+                    />}
+                    {activeStep === 3 && <BloodGroupInfo
+                        formData={formData}
+                        handler={fieldChangeHandler}
+                    />}
+                    {activeStep === 4 && <WeightInfo
+                        formData={formData}
+                        handler={fieldChangeHandler}
+                    />}
+                    {activeStep === 5 && <GenderInfo
+                        formData={formData}
+                        handler={fieldChangeHandler}
+                    />}
+                    {activeStep === 6 && <AddressInfo
+                        formData={formData}
+                        handler={fieldChangeHandler}
+                    />}
+                    {activeStep === 7 && <AgeInfo
+                        formData={formData}
+                        handler={fieldChangeHandler}
+                    />}
+                    {activeStep === 8 && <PhotoInfo
+                        formData={formData}
+                        handler={fieldChangeHandler}
+                    />}
 
-                <FormGroup>
-                    {activeStep < 8
-                        ? <AuthButton type="button" onClick={nextTabHandler}>Next</AuthButton>
-                        : <AuthButton type="button" onClick={submitHandler}>Start Journey</AuthButton>
-                    }
-                </FormGroup>
-            </DividerBox>
-        </AuthWrapper>
+                    <FormGroup>
+                        {activeStep < 8
+                            ? <AuthButton type="button" onClick={nextTabHandler}>Next</AuthButton>
+                            : <AuthButton type="button" onClick={submitHandler}>Start Journey</AuthButton>
+                        }
+                    </FormGroup>
+                </DividerBox>
+            </AuthWrapper>
+        </AuthLayout>
     )
 }
 

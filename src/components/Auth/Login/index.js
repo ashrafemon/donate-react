@@ -17,6 +17,7 @@ import {Link} from "react-router-dom";
 import {FaEye} from "react-icons/fa";
 import {useDispatch} from "react-redux";
 import {dispatchToggleMessage, login} from "../../../store/actions/auth/actions";
+import AuthLayout from "../../../layouts/AuthLayout";
 
 const Login = () => {
     const dispatch = useDispatch()
@@ -59,57 +60,59 @@ const Login = () => {
     }
 
     return (
-        <AuthWrapper>
-            <LogoSideBox>
-                <Logo/>
-            </LogoSideBox>
-            <DividerBox>
-                <PortionTitle>Sign In</PortionTitle>
+        <AuthLayout>
+            <AuthWrapper>
+                <LogoSideBox>
+                    <Logo/>
+                </LogoSideBox>
+                <DividerBox>
+                    <PortionTitle>Sign In</PortionTitle>
 
-                <form onSubmit={submitHandler}>
+                    <form onSubmit={submitHandler}>
+                        <FormGroup>
+                            <FormLabel htmlFor="email">Email or Username</FormLabel>
+                            <FormControlText
+                                value={formData.email}
+                                type="email"
+                                id="email"
+                                placeholder="johndoe@gmail.com"
+                                onChange={(e) => fieldChangeHandler(e.target.value, 'email')}
+                            />
+                        </FormGroup>
+
+                        <FormGroup>
+                            <FormLabel htmlFor="password">Password</FormLabel>
+                            <FormControlText
+                                value={formData.password}
+                                ref={passwordRef}
+                                type="password"
+                                id="password"
+                                placeholder="******"
+                                onChange={(e) => fieldChangeHandler(e.target.value, 'password')}
+                            />
+                            <PasswordToggleButton
+                                type="button"
+                                onClick={passwordToggleHandler}
+                            >
+                                <FaEye/>
+                            </PasswordToggleButton>
+                        </FormGroup>
+
+                        <FormGroup>
+                            <AuthButton type="submit">Login</AuthButton>
+                        </FormGroup>
+                    </form>
+
                     <FormGroup>
-                        <FormLabel htmlFor="email">Email or Username</FormLabel>
-                        <FormControlText
-                            value={formData.email}
-                            type="email"
-                            id="email"
-                            placeholder="johndoe@gmail.com"
-                            onChange={(e) => fieldChangeHandler(e.target.value, 'email')}
-                        />
+                        <Link to="/">
+                            <LinkText>Forget Password?</LinkText>
+                        </Link>
+                        <AccessText>Don't have an account? <Link to="/register">Sign Up</Link></AccessText>
                     </FormGroup>
 
-                    <FormGroup>
-                        <FormLabel htmlFor="password">Password</FormLabel>
-                        <FormControlText
-                            value={formData.password}
-                            ref={passwordRef}
-                            type="password"
-                            id="password"
-                            placeholder="******"
-                            onChange={(e) => fieldChangeHandler(e.target.value, 'password')}
-                        />
-                        <PasswordToggleButton
-                            type="button"
-                            onClick={passwordToggleHandler}
-                        >
-                            <FaEye/>
-                        </PasswordToggleButton>
-                    </FormGroup>
-
-                    <FormGroup>
-                        <AuthButton type="submit">Login</AuthButton>
-                    </FormGroup>
-                </form>
-
-                <FormGroup>
-                    <Link to="/">
-                        <LinkText>Forget Password?</LinkText>
-                    </Link>
-                    <AccessText>Don't have an account? <Link to="/register">Sign Up</Link></AccessText>
-                </FormGroup>
-
-            </DividerBox>
-        </AuthWrapper>
+                </DividerBox>
+            </AuthWrapper>
+        </AuthLayout>
     )
 }
 

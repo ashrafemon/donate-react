@@ -1,32 +1,50 @@
 import React from "react";
 
-const Home = React.lazy(() => import('../pages/Home'))
-const Starter = React.lazy(() => import('../components/Starter'))
-
 const routes = [
     {
         path: '/',
         exact: true,
         name: 'Starter',
-        component: Starter
+        component: React.lazy(() => import('../components/Starter')),
+        meta: {
+            requiresAuth: false
+        }
     },
     {
         path: '/login',
         exact: true,
         name: 'Login',
-        component: React.lazy(() => import('../components/Auth/Login'))
+        component: React.lazy(() => import('../components/Auth/Login')),
+        meta: {
+            requiresAuth: false
+        }
     },
     {
         path: '/register',
         exact: true,
         name: 'Register',
-        component: React.lazy(() => import('../components/Auth/Register'))
+        component: React.lazy(() => import('../components/Auth/Register')),
+        meta: {
+            requiresAuth: false
+        }
     },
     {
         path: '/home',
         exact: true,
         name: 'Home',
-        component: Home
+        component: React.lazy(() => import('../components/User/Home')),
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        path: '/profile',
+        exact: true,
+        name: 'Profile',
+        component: React.lazy(() => import('../components/User/Profile')),
+        meta: {
+            requiresAuth: true
+        }
     },
 ]
 
